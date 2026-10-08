@@ -204,7 +204,16 @@ td.sel { color: var(--accent); background: rgba(255,106,19,.09); }
 .where .photo { margin-bottom: 16px; }
 .where .photo img { aspect-ratio: 4 / 3; object-position: 50% 18%; }
 @media (max-width: 820px) { .photos { grid-template-columns: 1fr; gap: 16px; margin-top: 28px; } }
-.form-opts .opt-body { grid-template-columns: 28px 1fr; background: var(--panel-2); }
+.form-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.form-opts label.opt { margin: 0; }
+.form-opts .opt-body { grid-template-columns: 28px 1fr; background: var(--panel-2); height: 100%; }
+@media (max-width: 560px) { .form-opts { grid-template-columns: 1fr; } }
+.extras { list-style: none; margin: 0 0 8px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.extras li { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 14px 16px; background: var(--panel); border-radius: 6px; border-left: 5px solid transparent; transition: background .15s, border-color .15s; }
+.extras li:hover { background: #343840; border-left-color: var(--accent); }
+.extras small { display: block; color: var(--muted); font-size: 15px; line-height: 1.3; }
+.extras b { font: 700 1.3rem/1 var(--head); white-space: nowrap; font-variant-numeric: tabular-nums; }
+#extras { margin-top: 36px; }
 .form-opts .opt:hover .opt-body, .form-opts .opt input:checked + .opt-body { background: #343840; }
 .sizes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 label.size { position: relative; display: block; margin: 0; font-weight: 400; }
@@ -570,8 +579,9 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
     <h3 class="tbl-title">Все цены таблицей</h3>
     <div class="sizes tbl-types" id="t-types"></div>
     <div id="price-table"></div>
+    <div id="extras"></div>
     <div class="price-notes">
-      <p>Цены в таблице за одно колесо. Комплекс (4 колеса с мойкой) и хранение шин считаются за весь комплект. Там, где стоит жёлтое «сумма», цену назовём по звонку.</p>
+      <p>Цены в таблице за одно колесо. Комплекс (4 колеса с мойкой) и хранение шин считаются за весь комплект. «От» значит минимальную цену, точную назовём после осмотра. Там, где стоит жёлтое «сумма», цену назовём по звонку.</p>
       <p>Точную стоимость назовём после того, как узнаем размер колёс и что с ними случилось.</p>
       <p>Не каждый прокол можно отремонтировать: решение принимает мастер после осмотра колеса. На выполненные работы даём гарантию, условия назовём по телефону.</p>
     </div>
@@ -742,7 +752,8 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
     { id: 'suv',   name: 'Джипы и внедорожники',  d: [17, 18, 19, 20, 21, 22] }
   ];
   // unit: 'wheel' - цена за одно колесо, 'set' - за весь комплект.
-  // p: null - цены пока нет (в таблице жёлтое [сумма]); нет типа в p - услуги для этого типа нет.
+  // p: null - услуга не зависит от диаметра: у неё либо одна цена flat (from: true - «от»),
+  //    либо цены пока нет (жёлтое [сумма]). Нет типа в p - такой услуги для этого типа нет.
   var SERVICES = [
     { id: 'kit', name: 'Комплекс: 4 колеса с мойкой', unit: 'set', hint: 'за комплект из 4 колёс', on: true,
       p: { car: [3800, 4300, 4800, 5400, 6000, 7000, 7500],
@@ -760,7 +771,14 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
       p: { car: [200, 200, 200, 200, 200, 300, 300], cross: [250, 300, 300, 400, 400, 500, 500] } },
     { id: 'dem', name: 'Демонтаж', unit: 'wheel',
       p: { car: [200, 200, 200, 300, 300, 700, 700], cross: [250, 500, 500, 600, 600, 700, 700] } },
-    { id: 'repair',  name: 'Ремонт прокола или пореза', unit: 'wheel', p: null },
+    // ремонт шин и дополнительные услуги: одна цена «от» для любого диаметра
+    { id: 'jgut',   name: 'Ремонт прокола жгутом', unit: 'wheel', p: null, flat: 700,  from: true },
+    { id: 'grib',   name: 'Ремонт прокола грибком', unit: 'wheel', p: null, flat: 1000, from: true },
+    { id: 'cord',   name: 'Кордовая заплатка', unit: 'wheel', p: null, flat: 1500, from: true },
+    { id: 'hot',    name: 'Горячая вулканизация', unit: 'wheel', p: null, flat: 4500, from: true },
+    { id: 'sensor', name: 'Датчики давления', unit: 'wheel', p: null, flat: 2000, from: true },
+    { id: 'wash',   name: 'Мойка колеса', unit: 'wheel', p: null, flat: 500,  from: true },
+    // цены пока нет
     { id: 'storage', name: 'Хранение шин', unit: 'set', hint: 'за сезон, комплект', p: null },
     { id: 'rim',     name: 'Правка диска', unit: 'wheel', p: null },
     { id: 'pump',    name: 'Подкачка колёс', unit: 'wheel', p: null }
@@ -775,13 +793,18 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
   SERVICES.forEach(function (s) { st.on[s.id] = !!s.on; });
 
   function T() { return TYPES[st.type]; }
-  function visible(s) { return s.p === null || !!s.p[T().id]; }
+  function isExtra(s) { return s.p === null; }
+  function visible(s) { return isExtra(s) || !!s.p[T().id]; }
   function unitOf(s) { return (s.unitBy && s.unitBy[T().id]) || s.unit; }
   function hintOf(s) {
     return (s.hintBy && s.hintBy[T().id]) || s.hint || (unitOf(s) === 'wheel' ? 'за колесо' : 'за комплект');
   }
-  function priceOf(s) { return s.p === null ? null : s.p[T().id][st.d]; }
+  function priceOf(s) {
+    if (s.flat != null) return s.flat;
+    return s.p === null ? null : s.p[T().id][st.d];
+  }
   function fmt(n) { return n.toLocaleString('ru-RU') + ' ₽'; }
+  function fmtS(s, n) { return (s.from ? 'от ' : '') + fmt(n); }
   var TODO = '<span class="todo">[сумма]</span>';
 
   // кнопки типа машины (в калькуляторе и над таблицей)
@@ -823,41 +846,51 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
     var head = '<tr><th scope="col">Услуга</th>' + t.d.map(function (d, i) {
       return '<th scope="col"' + (i === st.d ? ' class="sel"' : '') + '>R' + d + '</th>';
     }).join('') + '</tr>';
-    var rows = SERVICES.filter(visible).map(function (s) {
+    var rows = SERVICES.filter(function (s) { return !isExtra(s) && visible(s); }).map(function (s) {
       return '<tr><th scope="row">' + s.name + ' <span class="u">(' + hintOf(s) + ')</span></th>' +
         t.d.map(function (d, i) {
-          return '<td data-label="R' + d + '"' + (i === st.d ? ' class="sel"' : '') + '>' +
-            (s.p === null ? TODO : fmt(s.p[t.id][i])) + '</td>';
+          return '<td data-label="R' + d + '"' + (i === st.d ? ' class="sel"' : '') + '>' + fmt(s.p[t.id][i]) + '</td>';
         }).join('') + '</tr>';
     }).join('');
     $('price-table').innerHTML = '<table><thead>' + head + '</thead><tbody>' + rows + '</tbody></table>';
   }
 
+  // ремонт шин и дополнительные услуги: цена не зависит от диаметра, рисуем один раз
+  function renderExtras() {
+    var box = $('extras');
+    if (!box) return;
+    box.innerHTML = '<h3 class="tbl-title">Ремонт шин и дополнительные услуги</h3><ul class="extras">' +
+      SERVICES.filter(isExtra).map(function (s) {
+        return '<li><span>' + s.name + '<small>' + hintOf(s) + '</small></span><b>' +
+          (s.flat != null ? fmtS(s, s.flat) : TODO) + '</b></li>';
+      }).join('') + '</ul>';
+  }
+
   // счётчик итога
-  var totalEl = $('total'), shown = 0, raf = 0, settle = 0;
+  var totalEl = $('total'), shown = 0, raf = 0, settle = 0, prefix = '';
   function setTotal(n) {
     cancelAnimationFrame(raf);
     clearTimeout(settle);
-    if (reduce) { shown = n; totalEl.textContent = fmt(n); return; }
+    if (reduce) { shown = n; totalEl.textContent = prefix + fmt(n); return; }
     // если вкладка в фоне и кадры не идут, сумма всё равно станет точной
-    settle = setTimeout(function () { cancelAnimationFrame(raf); shown = n; totalEl.textContent = fmt(n); }, 600);
+    settle = setTimeout(function () { cancelAnimationFrame(raf); shown = n; totalEl.textContent = prefix + fmt(n); }, 600);
     var from = shown, t0 = performance.now();
     (function step(t) {
       var k = Math.min((t - t0) / 450, 1);
       k = 1 - Math.pow(1 - k, 3);
       shown = Math.round(from + (n - from) * k);
-      totalEl.textContent = fmt(shown);
+      totalEl.textContent = prefix + fmt(shown);
       if (k < 1) raf = requestAnimationFrame(step);
     })(t0);
   }
 
-  var current = { total: 0 };
+  var current = { total: 0, from: false };
   function render() {
-    var lines = '', total = 0, unpriced = [], any = false;
+    var lines = '', total = 0, unpriced = [], any = false, anyFrom = false;
     SERVICES.filter(visible).forEach(function (s) {
       var price = priceOf(s);
       var pe = optsBox.querySelector('.opt-price[data-id="' + s.id + '"]');
-      if (pe) pe.innerHTML = price === null ? TODO : fmt(price);
+      if (pe) pe.innerHTML = price === null ? TODO : fmtS(s, price);
       if (!st.on[s.id]) return;
       any = true;
       if (price === null) {
@@ -868,8 +901,9 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
       var wheel = unitOf(s) === 'wheel';
       var sum = price * (wheel ? st.count : 1);
       total += sum;
-      lines += '<li><span>' + s.name + '<small>' + (wheel ? fmt(price) + ' × ' + st.count : 'комплект') +
-        '</small></span><span class="l-sum">' + fmt(sum) + '</span></li>';
+      if (s.from) anyFrom = true;
+      lines += '<li><span>' + s.name + '<small>' + (wheel ? fmtS(s, price) + ' × ' + st.count : 'комплект') +
+        '</small></span><span class="l-sum">' + fmtS(s, sum) + '</span></li>';
     });
     $('lines').innerHTML = lines;
     $('t-empty').style.display = any ? 'none' : '';
@@ -879,9 +913,10 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
     $('cnt-minus').disabled = st.count <= 1;
     $('cnt-plus').disabled = st.count >= 4;
     $('book').disabled = !any;
-    current = { total: total };
+    current = { total: total, from: anyFrom };
+    prefix = anyFrom ? 'от ' : '';
     setTotal(total);
-    $('sr').textContent = 'Итого ' + fmt(total);
+    $('sr').textContent = 'Итого ' + prefix + fmt(total);
     renderTable();
   }
 
@@ -915,7 +950,7 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
       if (c) c.checked = !!st.on[s.id] && visible(s);
     });
     if (what) {
-      what.value = (T().name + '. Колёс: ' + st.count + '. По калькулятору примерно ' + fmt(current.total) + '.').replace(/ /g, ' ');
+      what.value = (T().name + '. Колёс: ' + st.count + '. По калькулятору ' + (current.from ? 'от ' : 'примерно ') + fmt(current.total) + '.').replace(/ /g, ' ');
     }
     var form = $('contacts');
     if (form) form.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
@@ -924,6 +959,7 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
 
   buildDiams();
   buildOpts();
+  renderExtras();
   render();
 })();
 </script>
