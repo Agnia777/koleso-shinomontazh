@@ -175,6 +175,84 @@ td .todo { font-size: 16px; }
 .price-notes { margin-top: 22px; color: var(--muted); max-width: 70ch; }
 .price-notes p { margin: 0 0 10px; }
 
+/* калькулятор: чек из мастерской */
+.calc { margin: 0 0 56px; }
+.calc-demo { margin: 0 0 22px; }
+.calc-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 36px; align-items: start; }
+.calc-form, .ticket { min-width: 0; }
+.calc fieldset, form fieldset { border: 0; padding: 0; margin: 0 0 28px; min-width: 0; }
+.calc legend, .step-title, form legend { font: 700 1.35rem/1.2 var(--head); padding: 0; margin: 0 0 12px; }
+form legend small { font: 400 15px/1.3 var(--body); color: var(--muted); }
+form fieldset { margin-bottom: 22px; }
+.sizes.two { grid-template-columns: repeat(2, 1fr); }
+.form-opts .opt-body { grid-template-columns: 28px 1fr; background: var(--panel-2); }
+.form-opts .opt:hover .opt-body, .form-opts .opt input:checked + .opt-body { background: #343840; }
+.sizes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+label.size { position: relative; display: block; margin: 0; font-weight: 400; }
+.size input, .opt input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; z-index: 1; }
+.size span {
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  min-height: 64px; padding: 8px;
+  font: 700 1.3rem/1.1 var(--head);
+  background: var(--panel); border: 3px solid var(--line); border-radius: 6px;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.size:hover span { border-color: var(--muted); }
+.size input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.size input:focus-visible + span, .opt input:focus-visible + .opt-body { outline: 3px solid var(--text); outline-offset: 3px; }
+.stepper { display: inline-flex; align-items: center; background: var(--panel); border: 3px solid var(--line); border-radius: 6px; }
+.stepper button { width: 56px; height: 56px; border: 0; background: transparent; color: var(--text); font: 700 1.8rem/1 var(--head); cursor: pointer; transition: background .15s, color .15s; }
+.stepper button:hover:not(:disabled) { background: var(--accent); color: var(--accent-ink); }
+.stepper button:disabled { color: var(--line); cursor: default; }
+.stepper output { min-width: 64px; text-align: center; font: 700 1.8rem/1 var(--head); }
+.step-hint { display: block; margin-top: 8px; color: var(--muted); font-size: 15px; }
+label.opt { position: relative; display: block; margin: 0 0 10px; font-weight: 400; }
+.opt-body {
+  display: grid; grid-template-columns: 28px 1fr auto; gap: 14px; align-items: center;
+  padding: 14px 16px; background: var(--panel); border-radius: 6px;
+  border-left: 5px solid transparent;
+  transition: background .15s, border-color .15s;
+}
+.opt:hover .opt-body { background: #343840; }
+.opt-box { width: 28px; height: 28px; border: 3px solid var(--muted); border-radius: 4px; display: grid; place-items: center; transition: background .15s, border-color .15s; }
+.opt-box::after { content: ""; width: 8px; height: 15px; border: solid var(--accent-ink); border-width: 0 3px 3px 0; transform: rotate(45deg) translate(-1px, -1px) scale(0); transition: transform .18s cubic-bezier(.3,1.6,.5,1); }
+.opt input:checked + .opt-body { background: #343840; border-left-color: var(--accent); }
+.opt input:checked + .opt-body .opt-box { background: var(--accent); border-color: var(--accent); }
+.opt input:checked + .opt-body .opt-box::after { transform: rotate(45deg) translate(-1px, -1px) scale(1); }
+.opt-name { display: block; font-weight: 600; line-height: 1.25; }
+.opt-hint { display: block; color: var(--muted); font-size: 15px; }
+.opt-price { font: 700 1.35rem/1 var(--head); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+.ticket { position: sticky; top: 20px; background: var(--panel); border-radius: 10px; border-top: 6px solid var(--accent); padding: 24px 24px 24px; }
+.ticket h3 { font-size: 1.5rem; margin-bottom: 4px; }
+.t-meta { margin: 0 0 14px; color: var(--muted); font-size: 16px; }
+.lines { list-style: none; margin: 0; padding: 0; }
+.lines li { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 9px 0; border-bottom: 1px dotted var(--line); }
+.lines small { display: block; color: var(--muted); font-size: 14px; line-height: 1.3; }
+.l-sum { font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.t-empty { margin: 0; color: var(--muted); }
+.tear { position: relative; border-top: 2px dashed var(--line); margin: 20px -24px; }
+.tear::before, .tear::after { content: ""; position: absolute; top: -12px; width: 22px; height: 22px; border-radius: 50%; background: var(--panel-2); }
+.tear::before { left: -11px; }
+.tear::after { right: -11px; }
+.total { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.total > span { font: 700 1.3rem/1 var(--head); }
+.total output { font: 700 clamp(2.2rem, 5vw, 3.2rem)/1 var(--head); color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.t-note { margin: 12px 0 18px; color: var(--muted); font-size: 15px; }
+.t-btns { display: grid; gap: 10px; }
+.t-btns .btn { width: 100%; padding: 0 16px; text-align: center; }
+.btn:disabled { opacity: .4; cursor: not-allowed; }
+.btn:disabled:hover { background: var(--accent); border-color: var(--accent); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.tbl-title { font-size: 1.6rem; margin: 0 0 14px; }
+@media (max-width: 820px) {
+  .calc { margin-bottom: 40px; }
+  .calc-grid { grid-template-columns: 1fr; gap: 24px; }
+  .ticket { position: static; }
+  .size span { font-size: 1.1rem; min-height: 60px; }
+  .opt-body { gap: 12px; padding: 12px; }
+}
+
 /* шаги */
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; margin: 0 0 28px; padding: 0; list-style: none; counter-reset: s; }
 .steps li { counter-increment: s; }
@@ -421,6 +499,49 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
 <section class="prices" id="ceny">
   <div class="wrap">
     <h2>Что мы делаем и сколько это стоит</h2>
+
+    <!-- Калькулятор. Цены лежат в скрипте внизу страницы (PRICES). -->
+    <div class="calc" id="calc">
+      <p class="calc-demo"><span class="todo">Суммы в калькуляторе условные: заменить настоящими ценами.</span></p>
+      <div class="calc-grid">
+        <div class="calc-form">
+          <fieldset>
+            <legend>Размер диска</legend>
+            <div class="sizes" id="sizes"></div>
+          </fieldset>
+          <div class="calc-step" style="margin-bottom:28px">
+            <div class="step-title" id="cnt-label">Сколько колёс</div>
+            <div class="stepper">
+              <button type="button" id="cnt-minus" aria-label="Меньше колёс">−</button>
+              <output id="cnt" aria-labelledby="cnt-label">4</output>
+              <button type="button" id="cnt-plus" aria-label="Больше колёс">+</button>
+            </div>
+            <span class="step-hint">Считается для услуг «за колесо»</span>
+          </div>
+          <fieldset>
+            <legend>Что нужно сделать</legend>
+            <div id="opts"></div>
+          </fieldset>
+        </div>
+
+        <aside class="ticket" aria-labelledby="t-title">
+          <h3 id="t-title">Ваш расчёт</h3>
+          <p class="t-meta" id="t-meta"></p>
+          <ul class="lines" id="lines"></ul>
+          <p class="t-empty" id="t-empty">Отметьте услуги слева - здесь появится расчёт.</p>
+          <div class="tear" aria-hidden="true"></div>
+          <div class="total"><span>Итого</span><output id="total">0 ₽</output></div>
+          <span class="sr" id="sr" aria-live="polite"></span>
+          <p class="t-note">Это примерная сумма. Точную стоимость назовём после осмотра колёс.</p>
+          <div class="t-btns">
+            <button class="btn" type="button" id="book">Записаться с этим расчётом</button>
+            <a class="btn ghost" href="tel:+70000000000">Позвонить</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <h3 class="tbl-title">Все цены таблицей</h3>
     <table>
       <thead>
         <tr><th scope="col">Услуга</th><th scope="col">R13-R16</th><th scope="col">R17-R19</th><th scope="col">R20 и больше</th></tr>
@@ -436,7 +557,7 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
       </tbody>
     </table>
     <div class="price-notes">
-      <p>Точную стоимость назовём после того, как узнаем размер колёс и что с ними случилось. Хранение и мойка считаются за комплект, остальное - за колесо.</p>
+      <p>Точную стоимость назовём после того, как узнаем размер колёс и что с ними случилось. Замена, хранение и мойка считаются за комплект, остальное - за колесо.</p>
       <p>Не каждый прокол можно отремонтировать: решение принимает мастер после осмотра колеса. На выполненные работы даём гарантию, условия назовём по телефону.</p>
     </div>
   </div>
@@ -544,11 +665,24 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
       <label>Телефон
         <input type="tel" name="phone" autocomplete="tel" placeholder="+7">
       </label>
-      <label>Марка машины и размер колёс <small>(необязательно)</small>
+      <label>Марка машины <small>(необязательно)</small>
         <input type="text" name="car">
       </label>
-      <label>Что нужно сделать <small>(необязательно)</small>
-        <textarea name="what" rows="3"></textarea>
+      <fieldset>
+        <legend>Размер колёс <small>(написан на шине сбоку, например R16)</small></legend>
+        <div class="sizes two" id="f-sizes">
+          <label class="size"><input type="radio" name="fsize" value="0"><span>R13-R16</span></label>
+          <label class="size"><input type="radio" name="fsize" value="1"><span>R17-R19</span></label>
+          <label class="size"><input type="radio" name="fsize" value="2"><span>R20 и больше</span></label>
+          <label class="size"><input type="radio" name="fsize" value="-1"><span>Не знаю</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Что нужно сделать</legend>
+        <div class="form-opts" id="f-opts"></div>
+      </fieldset>
+      <label>Что-то ещё <small>(необязательно)</small>
+        <textarea name="what" rows="2"></textarea>
       </label>
       <label class="consent">
         <input type="checkbox" name="consent">
@@ -572,6 +706,127 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
 </footer>
 
 <div class="callbar"><a class="btn ring" href="tel:+70000000000">Позвонить</a></div>
+
+<script>
+// Калькулятор. Отдельный скрипт: работает и когда анимация отключена.
+(function () {
+  // ЦЕНЫ - УСЛОВНЫЕ, заменить настоящими. Порядок сумм: R13-R16, R17-R19, R20 и больше.
+  // unit: 'set' - цена за комплект, 'wheel' - цена за одно колесо.
+  var SIZES = ['R13-R16', 'R17-R19', 'R20 и больше'];
+  var PRICES = [
+    { id: 'change',  name: 'Сезонная замена колёс', unit: 'set',   hint: 'за комплект из 4', p: [1000, 1500, 2000], on: true },
+    { id: 'balance', name: 'Балансировка',          unit: 'wheel', hint: 'за колесо',        p: [100, 150, 200] },
+    { id: 'repair',  name: 'Ремонт прокола или пореза', unit: 'wheel', hint: 'за колесо',    p: [300, 400, 500] },
+    { id: 'storage', name: 'Хранение шин',          unit: 'set',   hint: 'за сезон, комплект', p: [2000, 2500, 3000] },
+    { id: 'rim',     name: 'Правка диска',          unit: 'wheel', hint: 'за колесо',        p: [500, 700, 900] },
+    { id: 'pump',    name: 'Подкачка колёс',        unit: 'wheel', hint: 'за колесо',        p: [50, 60, 70] },
+    { id: 'wash',    name: 'Мойка колёс',           unit: 'set',   hint: 'за комплект',      p: [300, 400, 500] }
+  ];
+
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (id) { return document.getElementById(id); };
+  var sizesBox = $('sizes'), optsBox = $('opts');
+  if (!sizesBox || !optsBox) return;
+
+  var size = 0, count = 4, on = {};
+  PRICES.forEach(function (s) { on[s.id] = !!s.on; });
+
+  function fmt(n) { return n.toLocaleString('ru-RU') + ' ₽'; }
+
+  // размеры диска
+  sizesBox.innerHTML = SIZES.map(function (t, i) {
+    return '<label class="size"><input type="radio" name="size" value="' + i + '"' + (i === 0 ? ' checked' : '') + '><span>' + t + '</span></label>';
+  }).join('');
+
+  // услуги
+  optsBox.innerHTML = PRICES.map(function (s) {
+    return '<label class="opt"><input type="checkbox" value="' + s.id + '"' + (s.on ? ' checked' : '') + '>' +
+      '<span class="opt-body"><span class="opt-box" aria-hidden="true"></span>' +
+      '<span><span class="opt-name">' + s.name + '</span><span class="opt-hint">' + s.hint + '</span></span>' +
+      '<span class="opt-price" data-id="' + s.id + '"></span></span></label>';
+  }).join('');
+
+  // услуги в форме заявки (те же, что в калькуляторе)
+  var fOpts = $('f-opts');
+  if (fOpts) {
+    fOpts.innerHTML = PRICES.map(function (s) {
+      return '<label class="opt"><input type="checkbox" name="svc" value="' + s.id + '">' +
+        '<span class="opt-body"><span class="opt-box" aria-hidden="true"></span>' +
+        '<span class="opt-name">' + s.name + '</span></span></label>';
+    }).join('');
+  }
+
+  // счётчик итога
+  var totalEl = $('total'), shown = 0, raf = 0, settle = 0;
+  function setTotal(n) {
+    cancelAnimationFrame(raf);
+    clearTimeout(settle);
+    if (reduce) { shown = n; totalEl.textContent = fmt(n); return; }
+    // если вкладка в фоне и кадры не идут, сумма всё равно станет точной
+    settle = setTimeout(function () { cancelAnimationFrame(raf); shown = n; totalEl.textContent = fmt(n); }, 600);
+    var from = shown, t0 = performance.now();
+    (function step(t) {
+      var k = Math.min((t - t0) / 450, 1);
+      k = 1 - Math.pow(1 - k, 3);
+      shown = Math.round(from + (n - from) * k);
+      totalEl.textContent = fmt(shown);
+      if (k < 1) raf = requestAnimationFrame(step);
+    })(t0);
+  }
+
+  var current = { total: 0, names: [] };
+  function render() {
+    var lines = '', total = 0, names = [];
+    PRICES.forEach(function (s) {
+      var priceEl = optsBox.querySelector('.opt-price[data-id="' + s.id + '"]');
+      priceEl.textContent = fmt(s.p[size]);
+      if (!on[s.id]) return;
+      var qty = s.unit === 'wheel' ? count : 1;
+      var sum = s.p[size] * qty;
+      total += sum;
+      names.push(s.name.toLowerCase());
+      lines += '<li><span>' + s.name + '<small>' +
+        (s.unit === 'wheel' ? fmt(s.p[size]) + ' × ' + count : 'комплект') +
+        '</small></span><span class="l-sum">' + fmt(sum) + '</span></li>';
+    });
+    $('lines').innerHTML = lines;
+    $('t-empty').style.display = names.length ? 'none' : '';
+    $('t-meta').textContent = 'Диск ' + SIZES[size] + ', колёс: ' + count;
+    $('cnt').textContent = count;
+    $('cnt-minus').disabled = count <= 1;
+    $('cnt-plus').disabled = count >= 4;
+    $('book').disabled = !names.length;
+    current = { total: total, names: names };
+    setTotal(total);
+    $('sr').textContent = 'Итого ' + fmt(total);
+  }
+
+  sizesBox.addEventListener('change', function (e) { size = +e.target.value; render(); });
+  optsBox.addEventListener('change', function (e) { on[e.target.value] = e.target.checked; render(); });
+  $('cnt-minus').addEventListener('click', function () { if (count > 1) { count--; render(); } });
+  $('cnt-plus').addEventListener('click', function () { if (count < 4) { count++; render(); } });
+
+  // «Записаться с этим расчётом» - переносит выбранное в форму
+  $('book').addEventListener('click', function () {
+    var what = document.querySelector('textarea[name=what]');
+    // размер и услуги отмечаются в форме
+    var fs = document.querySelector('input[name=fsize][value="' + size + '"]');
+    if (fs) fs.checked = true;
+    PRICES.forEach(function (s) {
+      var c = document.querySelector('#f-opts input[value="' + s.id + '"]');
+      if (c) c.checked = !!on[s.id];
+    });
+    if (what) {
+      what.value = ('Колёс: ' + count + '. По калькулятору примерно ' + fmt(current.total) + '.').replace(/ /g, ' ');
+    }
+    var form = $('contacts');
+    if (form) form.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+    if (what) setTimeout(function () { what.focus({ preventScroll: true }); }, reduce ? 0 : 600);
+  });
+
+  render();
+})();
+</script>
 
 <script>
 (function () {
