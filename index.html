@@ -291,7 +291,13 @@ td.sel { color: var(--accent); background: rgba(255,106,19,.09); }
 .av-name { font: 700 1rem/1.2 var(--head); }
 .av-role { font-size: 14px; line-height: 1.3; }
 .av-tip .todo { font-size: inherit; white-space: nowrap; }
-.rev-hint { margin: 0 0 14px; color: var(--muted); font-size: 16px; }
+.av-text { display: none; }
+.av.active .av-img { border-color: var(--accent); }
+.rev-hint { margin: 0 0 18px; color: var(--muted); font-size: 16px; }
+.rev-card { margin: 0 0 22px; max-width: 680px; padding: 22px 24px; background: var(--panel); border-radius: 6px; border-left: 6px solid var(--accent); }
+.rev-card blockquote { margin: 0 0 14px; font-size: 1.25rem; line-height: 1.5; }
+.rev-card figcaption { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; color: var(--muted); }
+.rev-card figcaption b { font: 700 1.1rem/1.2 var(--head); color: var(--text); }
 .rev-note { margin: 0; }
 .form-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .form-opts label.opt { margin: 0; }
@@ -713,14 +719,18 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
   <div class="wrap">
     <h2>Что говорят клиенты</h2>
     <div class="avatars" id="avatars">
-      <button type="button" class="av" aria-label="Отзыв клиента: заглушка 1"><span class="av-img"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="12" fill="currentColor"/><path d="M8 64c2-16 12-23 24-23s22 7 24 23z" fill="currentColor"/></svg></span><span class="av-tip" aria-hidden="true"><span class="av-name"><span class="todo">[имя клиента]</span></span><span class="av-role"><span class="todo">[машина, что делали]</span></span></span></button>
-      <button type="button" class="av" aria-label="Отзыв клиента: заглушка 2"><span class="av-img"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="12" fill="currentColor"/><path d="M8 64c2-16 12-23 24-23s22 7 24 23z" fill="currentColor"/></svg></span><span class="av-tip" aria-hidden="true"><span class="av-name"><span class="todo">[имя клиента]</span></span><span class="av-role"><span class="todo">[машина, что делали]</span></span></span></button>
-      <button type="button" class="av" aria-label="Отзыв клиента: заглушка 3"><span class="av-img"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="12" fill="currentColor"/><path d="M8 64c2-16 12-23 24-23s22 7 24 23z" fill="currentColor"/></svg></span><span class="av-tip" aria-hidden="true"><span class="av-name"><span class="todo">[имя клиента]</span></span><span class="av-role"><span class="todo">[машина, что делали]</span></span></span></button>
-      <button type="button" class="av" aria-label="Отзыв клиента: заглушка 4"><span class="av-img"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="12" fill="currentColor"/><path d="M8 64c2-16 12-23 24-23s22 7 24 23z" fill="currentColor"/></svg></span><span class="av-tip" aria-hidden="true"><span class="av-name"><span class="todo">[имя клиента]</span></span><span class="av-role"><span class="todo">[машина, что делали]</span></span></span></button>
-      <button type="button" class="av" aria-label="Отзыв клиента: заглушка 5"><span class="av-img"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="12" fill="currentColor"/><path d="M8 64c2-16 12-23 24-23s22 7 24 23z" fill="currentColor"/></svg></span><span class="av-tip" aria-hidden="true"><span class="av-name"><span class="todo">[имя клиента]</span></span><span class="av-role"><span class="todo">[машина, что делали]</span></span></span></button>
-      <button type="button" class="av" aria-label="Отзыв клиента: заглушка 6"><span class="av-img"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="12" fill="currentColor"/><path d="M8 64c2-16 12-23 24-23s22 7 24 23z" fill="currentColor"/></svg></span><span class="av-tip" aria-hidden="true"><span class="av-name"><span class="todo">[имя клиента]</span></span><span class="av-role"><span class="todo">[машина, что делали]</span></span></span></button>
+      <button type="button" class="av" aria-label="Отзыв клиента: заглушка 1"><span class="av-img"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="12" fill="currentColor"/><path d="M8 64c2-16 12-23 24-23s22 7 24 23z" fill="currentColor"/></svg></span><span class="av-tip" aria-hidden="true"><span class="av-name"><span class="todo">[имя клиента]</span></span><span class="av-role"><span class="todo">[машина, что делали]</span></span><span class="av-text"><span class="todo">[Текст отзыва 1 - настоящий, со слов клиента]</span></span></span></button>
+      <button type="button" class="av" aria-label="Отзыв клиента: заглушка 2"><span class="av-img"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="12" fill="currentColor"/><path d="M8 64c2-16 12-23 24-23s22 7 24 23z" fill="currentColor"/></svg></span><span class="av-tip" aria-hidden="true"><span class="av-name"><span class="todo">[имя клиента]</span></span><span class="av-role"><span class="todo">[машина, что делали]</span></span><span class="av-text"><span class="todo">[Текст отзыва 2 - настоящий, со слов клиента]</span></span></span></button>
+      <button type="button" class="av" aria-label="Отзыв клиента: заглушка 3"><span class="av-img"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="12" fill="currentColor"/><path d="M8 64c2-16 12-23 24-23s22 7 24 23z" fill="currentColor"/></svg></span><span class="av-tip" aria-hidden="true"><span class="av-name"><span class="todo">[имя клиента]</span></span><span class="av-role"><span class="todo">[машина, что делали]</span></span><span class="av-text"><span class="todo">[Текст отзыва 3 - настоящий, со слов клиента]</span></span></span></button>
+      <button type="button" class="av" aria-label="Отзыв клиента: заглушка 4"><span class="av-img"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="12" fill="currentColor"/><path d="M8 64c2-16 12-23 24-23s22 7 24 23z" fill="currentColor"/></svg></span><span class="av-tip" aria-hidden="true"><span class="av-name"><span class="todo">[имя клиента]</span></span><span class="av-role"><span class="todo">[машина, что делали]</span></span><span class="av-text"><span class="todo">[Текст отзыва 4 - настоящий, со слов клиента]</span></span></span></button>
+      <button type="button" class="av" aria-label="Отзыв клиента: заглушка 5"><span class="av-img"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="12" fill="currentColor"/><path d="M8 64c2-16 12-23 24-23s22 7 24 23z" fill="currentColor"/></svg></span><span class="av-tip" aria-hidden="true"><span class="av-name"><span class="todo">[имя клиента]</span></span><span class="av-role"><span class="todo">[машина, что делали]</span></span><span class="av-text"><span class="todo">[Текст отзыва 5 - настоящий, со слов клиента]</span></span></span></button>
+      <button type="button" class="av" aria-label="Отзыв клиента: заглушка 6"><span class="av-img"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="12" fill="currentColor"/><path d="M8 64c2-16 12-23 24-23s22 7 24 23z" fill="currentColor"/></svg></span><span class="av-tip" aria-hidden="true"><span class="av-name"><span class="todo">[имя клиента]</span></span><span class="av-role"><span class="todo">[машина, что делали]</span></span><span class="av-text"><span class="todo">[Текст отзыва 6 - настоящий, со слов клиента]</span></span></span></button>
     </div>
     <p class="rev-hint">Наведите курсор или нажмите на круг.</p>
+    <figure class="rev-card" id="rev-card" aria-live="polite">
+      <blockquote id="rev-text"></blockquote>
+      <figcaption><b id="rev-name"></b><span id="rev-role"></span></figcaption>
+    </figure>
     <p class="rev-note"><span class="todo">Здесь будут настоящие отзывы: фото клиента, имя и что делали. Пока заглушки.</span></p>
   </div>
 </section>
@@ -1090,7 +1100,16 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
     var min = 8 + half, max = document.documentElement.clientWidth - 8 - half;
     av.style.setProperty('--bx', (Math.min(Math.max(c, min), max) - c) + 'px');
   }
-  function show(av) { place(av); av.classList.add('show'); }
+  // карточка с текстом отзыва под кругами показывает последнего выбранного
+  function pick(av) {
+    [].forEach.call(list, function (o) { o.classList.toggle('active', o === av); });
+    var t = document.getElementById('rev-text');
+    if (!t) return;
+    t.innerHTML = av.querySelector('.av-text').innerHTML;
+    document.getElementById('rev-name').innerHTML = av.querySelector('.av-name').innerHTML;
+    document.getElementById('rev-role').innerHTML = av.querySelector('.av-role').innerHTML;
+  }
+  function show(av) { place(av); av.classList.add('show'); pick(av); }
   function hide(av) {
     av.classList.remove('show');
     av.style.setProperty('--tx', '0px');
@@ -1117,6 +1136,7 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
   document.addEventListener('touchstart', function (e) {
     if (!e.target.closest('.av')) [].forEach.call(list, hide);
   }, { passive: true });
+  pick(list[0]);
 })();
 </script>
 
