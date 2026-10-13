@@ -296,7 +296,7 @@ td.sel { color: var(--accent); background: rgba(255,106,19,.09); }
 .rev-card blockquote { margin: 0 0 14px; font-size: 1.25rem; line-height: 1.5; }
 .rev-card figcaption { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; color: var(--muted); }
 .rev-card figcaption b { font: 700 1.1rem/1.2 var(--head); color: var(--text); }
-.rev-note { margin: 0; }
+.rev-note { margin: 0; font-size: 14px; color: var(--muted); }
 .form-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .form-opts label.opt { margin: 0; }
 .form-opts .opt-body { grid-template-columns: 28px 1fr; background: var(--panel-2); height: 100%; }
@@ -580,7 +580,7 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
 </head>
 <body>
 
-<div class="mockbar"><div class="wrap">Демо-сайт для портфолио. Форма пока не работает.</div></div>
+<div class="mockbar"><div class="wrap">Демо-сайт для портфолио. Названия, цены, отзывы и контакты вымышлены. Форма пока не работает.</div></div>
 
 <div class="progress" aria-hidden="true"></div>
 
@@ -727,23 +727,23 @@ tbody tr:hover { background: #343840; box-shadow: inset 5px 0 var(--accent); }
   </div>
 </section>
 
-<!-- Блок: отзывы (заглушки, настоящие отзывы подставить позже) -->
+<!-- Блок: отзывы (вымышленные, для демо-сайта; для настоящего клиента заменить его отзывами) -->
 <section class="reviews" id="otzyvy">
   <div class="wrap">
     <h2>Что говорят клиенты</h2>
     <div class="avatars" id="avatars">
-      <button type="button" class="av" aria-label="Отзыв клиента: заглушка 1"><span class="av-img"><img src="img/review-1.jpg" width="64" height="64" alt="" loading="lazy"></span><span class="av-tip" aria-hidden="true"><span class="av-name"><span class="todo">[имя клиента]</span></span><span class="av-role"><span class="todo">[машина, что делали]</span></span><span class="av-text"><span class="todo">[Текст отзыва 1 - настоящий, со слов клиента]</span></span></span></button>
-      <button type="button" class="av" aria-label="Отзыв клиента: заглушка 2"><span class="av-img"><img src="img/review-2.jpg" width="64" height="64" alt="" loading="lazy"></span><span class="av-tip" aria-hidden="true"><span class="av-name"><span class="todo">[имя клиента]</span></span><span class="av-role"><span class="todo">[машина, что делали]</span></span><span class="av-text"><span class="todo">[Текст отзыва 2 - настоящий, со слов клиента]</span></span></span></button>
-      <button type="button" class="av" aria-label="Отзыв клиента: заглушка 3"><span class="av-img"><img src="img/review-3.jpg" width="64" height="64" alt="" loading="lazy"></span><span class="av-tip" aria-hidden="true"><span class="av-name"><span class="todo">[имя клиента]</span></span><span class="av-role"><span class="todo">[машина, что делали]</span></span><span class="av-text"><span class="todo">[Текст отзыва 3 - настоящий, со слов клиента]</span></span></span></button>
-      <button type="button" class="av" aria-label="Отзыв клиента: заглушка 4"><span class="av-img"><img src="img/review-4.jpg" width="64" height="64" alt="" loading="lazy"></span><span class="av-tip" aria-hidden="true"><span class="av-name"><span class="todo">[имя клиента]</span></span><span class="av-role"><span class="todo">[машина, что делали]</span></span><span class="av-text"><span class="todo">[Текст отзыва 4 - настоящий, со слов клиента]</span></span></span></button>
-      <button type="button" class="av" aria-label="Отзыв клиента: заглушка 5"><span class="av-img"><img src="img/review-5.jpg" width="64" height="64" alt="" loading="lazy"></span><span class="av-tip" aria-hidden="true"><span class="av-name"><span class="todo">[имя клиента]</span></span><span class="av-role"><span class="todo">[машина, что делали]</span></span><span class="av-text"><span class="todo">[Текст отзыва 5 - настоящий, со слов клиента]</span></span></span></button>
+      <button type="button" class="av" aria-label="Отзыв клиента: Сергей"><span class="av-img"><img src="img/review-1.jpg" width="64" height="64" alt="" loading="lazy"></span><span class="av-tip" aria-hidden="true"><span class="av-name">Сергей</span><span class="av-role">Toyota Camry, замена колёс и балансировка</span><span class="av-text">Записался по телефону, приехал ко времени, очереди не было. Поменяли колёса и сбалансировали примерно за час. Цену назвали заранее, и в итоге она не изменилась.</span></span></button>
+      <button type="button" class="av" aria-label="Отзыв клиента: Артём"><span class="av-img"><img src="img/review-2.jpg" width="64" height="64" alt="" loading="lazy"></span><span class="av-tip" aria-hidden="true"><span class="av-name">Артём</span><span class="av-role">Kia Rio, ремонт прокола ночью</span><span class="av-text">Поймал гвоздь около полуночи. Позвонил, сказали приезжать. Мастер осмотрел колесо, отремонтировал жгутом и объяснил, на что обратить внимание дальше.</span></span></button>
+      <button type="button" class="av" aria-label="Отзыв клиента: Дмитрий"><span class="av-img"><img src="img/review-3.jpg" width="64" height="64" alt="" loading="lazy"></span><span class="av-tip" aria-hidden="true"><span class="av-name">Дмитрий</span><span class="av-role">Skoda Octavia, балансировка</span><span class="av-text">На скорости бил руль. Сделали балансировку, и вибрация пропала. Всё объяснили понятно и ничего лишнего не предлагали.</span></span></button>
+      <button type="button" class="av" aria-label="Отзыв клиента: Анна"><span class="av-img"><img src="img/review-4.jpg" width="64" height="64" alt="" loading="lazy"></span><span class="av-tip" aria-hidden="true"><span class="av-name">Анна</span><span class="av-role">Hyundai Creta, замена колёс и мойка</span><span class="av-text">Приехала с маленьким ребёнком, поэтому важна была скорость. Колёса поменяли и помыли, ждать пришлось недолго. Осталась довольна.</span></span></button>
+      <button type="button" class="av" aria-label="Отзыв клиента: Елена"><span class="av-img"><img src="img/review-5.jpg" width="64" height="64" alt="" loading="lazy"></span><span class="av-tip" aria-hidden="true"><span class="av-name">Елена</span><span class="av-role">Mazda CX-5, комплекс на четыре колеса</span><span class="av-text">Взяла комплекс: замена, балансировка и мойка. Цену за все четыре колеса сказали сразу, дополнительно ничего не просили.</span></span></button>
     </div>
     <p class="rev-hint">Наведите курсор или нажмите на круг.</p>
     <figure class="rev-card" id="rev-card" aria-live="polite">
       <blockquote id="rev-text"></blockquote>
       <figcaption><b id="rev-name"></b><span id="rev-role"></span></figcaption>
     </figure>
-    <p class="rev-note"><span class="todo">Фото, имена и тексты отзывов - заглушки. Заменить настоящими отзывами клиентов.</span></p>
+    <p class="rev-note">Фото, имена и отзывы вымышлены: это демо-сайт для портфолио.</p>
   </div>
 </section>
 
